@@ -1,0 +1,257 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1E1A3F8B19DB2917004E788A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A3F8A19DB2917004E788A /* main.cpp */; };
+		1E1A3F9219DB295F004E788A /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E1A3F9119DB295F004E788A /* GLUT.framework */; };
+		1E1A3F9419DB2966004E788A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E1A3F9319DB2966004E788A /* OpenGL.framework */; };
+		1E1A3F9619DB296D004E788A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E1A3F9519DB296D004E788A /* Cocoa.framework */; };
+		1E1A3F9A19DB2B27004E788A /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E1A3F9919DB2B27004E788A /* OpenAL.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1E1A3F8519DB2917004E788A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1E1A3F8719DB2917004E788A /* SistemaSolar */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SistemaSolar; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E1A3F8A19DB2917004E788A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		1E1A3F9119DB295F004E788A /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		1E1A3F9319DB2966004E788A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		1E1A3F9519DB296D004E788A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		1E1A3F9819DB29DC004E788A /* hw5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hw5.h; sourceTree = "<group>"; };
+		1E1A3F9919DB2B27004E788A /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1E1A3F8419DB2917004E788A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E1A3F9A19DB2B27004E788A /* OpenAL.framework in Frameworks */,
+				1E1A3F9619DB296D004E788A /* Cocoa.framework in Frameworks */,
+				1E1A3F9419DB2966004E788A /* OpenGL.framework in Frameworks */,
+				1E1A3F9219DB295F004E788A /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1E1A3F7E19DB2917004E788A = {
+			isa = PBXGroup;
+			children = (
+				1E1A3F9919DB2B27004E788A /* OpenAL.framework */,
+				1E1A3F8919DB2917004E788A /* SistemaSolar */,
+				1E1A3F8819DB2917004E788A /* Products */,
+				1E1A3F9519DB296D004E788A /* Cocoa.framework */,
+				1E1A3F9319DB2966004E788A /* OpenGL.framework */,
+				1E1A3F9119DB295F004E788A /* GLUT.framework */,
+			);
+			sourceTree = "<group>";
+		};
+		1E1A3F8819DB2917004E788A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1E1A3F8719DB2917004E788A /* SistemaSolar */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1E1A3F8919DB2917004E788A /* SistemaSolar */ = {
+			isa = PBXGroup;
+			children = (
+				1E1A3F8A19DB2917004E788A /* main.cpp */,
+				1E1A3F9819DB29DC004E788A /* hw5.h */,
+			);
+			path = SistemaSolar;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1E1A3F8619DB2917004E788A /* SistemaSolar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E1A3F8E19DB2917004E788A /* Build configuration list for PBXNativeTarget "SistemaSolar" */;
+			buildPhases = (
+				1E1A3F8319DB2917004E788A /* Sources */,
+				1E1A3F8419DB2917004E788A /* Frameworks */,
+				1E1A3F8519DB2917004E788A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SistemaSolar;
+			productName = SistemaSolar;
+			productReference = 1E1A3F8719DB2917004E788A /* SistemaSolar */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1E1A3F7F19DB2917004E788A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = LuisMendoza;
+				TargetAttributes = {
+					1E1A3F8619DB2917004E788A = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 1E1A3F8219DB2917004E788A /* Build configuration list for PBXProject "SistemaSolar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1E1A3F7E19DB2917004E788A;
+			productRefGroup = 1E1A3F8819DB2917004E788A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1E1A3F8619DB2917004E788A /* SistemaSolar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1E1A3F8319DB2917004E788A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E1A3F8B19DB2917004E788A /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1E1A3F8C19DB2917004E788A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1E1A3F8D19DB2917004E788A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1E1A3F8F19DB2917004E788A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1E1A3F9019DB2917004E788A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1E1A3F8219DB2917004E788A /* Build configuration list for PBXProject "SistemaSolar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E1A3F8C19DB2917004E788A /* Debug */,
+				1E1A3F8D19DB2917004E788A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E1A3F8E19DB2917004E788A /* Build configuration list for PBXNativeTarget "SistemaSolar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E1A3F8F19DB2917004E788A /* Debug */,
+				1E1A3F9019DB2917004E788A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1E1A3F7F19DB2917004E788A /* Project object */;
+}
