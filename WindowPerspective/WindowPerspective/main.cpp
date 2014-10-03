@@ -75,7 +75,7 @@ void reshape(int width, int height){
     glMatrixMode(GL_PROJECTION);
     
     glLoadIdentity();
-    
+    //Ajustar el viewport
     glViewport(0, 0, width, height);
     gluPerspective(45, ratio, 0.001, 1000);
     
