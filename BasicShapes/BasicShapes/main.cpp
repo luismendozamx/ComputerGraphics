@@ -58,6 +58,8 @@ void drawScene() {
     glMatrixMode(GL_MODELVIEW); //Switch to the drawing perspective
     glLoadIdentity(); //Reset the drawing perspective
     
+    //glTranslatef(0.0f, 0.0f, -5.0f); //Move forward 5 units. All z coordinates should be moved 5 units as well.
+    
     glBegin(GL_QUADS); //Begin quadrilateral coordinates
     
     //Trapezoid
