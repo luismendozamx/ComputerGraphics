@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E0D576219DF6F3C003BA6AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E0D576119DF6F3C003BA6AC /* main.cpp */; };
 		1E0D576919DF6F4A003BA6AC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0D576819DF6F4A003BA6AC /* OpenGL.framework */; };
 		1E0D576B19DF6F4F003BA6AC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0D576A19DF6F4F003BA6AC /* Cocoa.framework */; };
 		1E0D576D19DF6F57003BA6AC /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0D576C19DF6F57003BA6AC /* GLUT.framework */; };
+		1E721C9C19E37BBC00FB695E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E721C9B19E37BBC00FB695E /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,10 +27,10 @@
 
 /* Begin PBXFileReference section */
 		1E0D575E19DF6F3C003BA6AC /* Lighting */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lighting; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E0D576119DF6F3C003BA6AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1E0D576819DF6F4A003BA6AC /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		1E0D576A19DF6F4F003BA6AC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1E0D576C19DF6F57003BA6AC /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		1E721C9B19E37BBC00FB695E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +69,7 @@
 		1E0D576019DF6F3C003BA6AC /* Lighting */ = {
 			isa = PBXGroup;
 			children = (
-				1E0D576119DF6F3C003BA6AC /* main.cpp */,
+				1E721C9B19E37BBC00FB695E /* main.cpp */,
 			);
 			path = Lighting;
 			sourceTree = "<group>";
@@ -130,7 +130,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E0D576219DF6F3C003BA6AC /* main.cpp in Sources */,
+				1E721C9C19E37BBC00FB695E /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +244,7 @@
 				1E0D576719DF6F3C003BA6AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
