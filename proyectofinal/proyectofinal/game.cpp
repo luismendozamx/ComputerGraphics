@@ -19,9 +19,7 @@ namespace {
     
     const float PADDLE_STEP_TIME = 0.01f;//Tiempo que dura el movimiento de la paleta
     const float TIME_TO_MAXIMUM_SPEED = 0.18f;//Tiempo que toma acelerar la paleta de 0 a su velocidad máxima.
-    //The maximum angle formed by the direction at which a ball is hit off of a
-    //paddle and the normal direction for the paddle
-    const float MAX_PADDLE_BOUNCE_ANGLE_OFFSET = 0.85f * PI / 2;//
+    const float MAX_PADDLE_BOUNCE_ANGLE_OFFSET = 0.85f * PI / 2;//Ángulo máximo de rebote
     const float PLAYER_MAXIMUM_SPEED = 2.2f;//Velocidad máxima de la paleta
     const float BALL_FADE_IN_TIME = 0.5f;//Tiempo para aparecer una pelota
     const float BALL_FADE_OUT_TIME = 0.5f;//Tiempo para desaparecer una pelota
@@ -234,22 +232,17 @@ Game::~Game() {
 }
 
 namespace {
-    //Returns whether the point (dx, dz) lies within r units of (0, 0)
+    //Para saber si está dentro del radio de colisión
     bool intersectsCircle(float dx, float dz, float r) {
         return dx * dx + dz * dz < r * r;
     }
     
-    //Returns whether a ball is colliding with a circle that is dx units to the
-    //right and dz units inward from it, where r is the sum of the radius of the
-    //ball and the radius of the circle and (vx, vz) is the velocity of the ball
+    //Regresa si hay o no intersección
     bool collisionWithCircle(float dx, float dz, float r, float vx, float vz) {
         return intersectsCircle(dx, dz, r) && vx * dx + vz * dz > 0;
     }
     
-    //Returns the resultant angle when an object traveling at an angle of angle
-    //bounces off of a wall whose normal is at an angle of normal.  The returned
-    //angle will be between 0 and 2 * PI.  An angle of 0 indicates the positive
-    //x direction, and an angle of PI / 2 indicates the positive z direction.
+    //Regresa el ángulo de reflexión
     float reflect(float angle, float normal) {
         angle = 2 * normal - PI - angle;
         while (angle < 0) {
@@ -261,8 +254,7 @@ namespace {
         return angle;
     }
     
-    //Adjusts the ball's angle in response to a collision with a circle at the
-    //specified position
+    //Modifica el ángulo dependiendo de la colisión
     void collideWithCircle(Ball* ball, float x, float z) {
         if (ball->fadeAmount() < 1) {
             return;
@@ -281,17 +273,12 @@ namespace {
         ball->setAngle(newBallAngle);
     }
     
-    //Returns whether a paddle at the indicated position has intercepted a ball at
-    //the indicated position, where the positions are measured parallel to the
-    //direction in which the paddle moves
+    //Regresa si hubo colisión con una paleta
     bool collisionWithPaddle(float paddlePos, float ballPos) {
         return abs(paddlePos - ballPos) < PADDLE_LENGTH / 2;
     }
     
-    //Adjusts the ball's angle in response to a collision with a paddle.  The
-    //positions are measured parallel to the direction in which the paddle moves,
-    //and the paddle's position is its distance from its center to the corner to
-    //its right.
+    //Ajusta el ángulo y dirección de la pelota al colisionar
     void collideWithPaddle(Ball* ball,
                          int paddleIndex,
                          float paddlePos,
@@ -317,7 +304,7 @@ void Game::handleCollisions() {
             continue;
         }
         
-        //Ball-barrier collisions
+        //Colisión entre pelota y barrera
         for(float z = 0; z < 2; z += 1) {
             for(float x = 0; x < 2; x += 1) {
                 if (collisionWithCircle(x - ball->x(), z - ball->z(),
@@ -329,7 +316,7 @@ void Game::handleCollisions() {
             }
         }
         
-        //Ball-ball collisions
+        //Colisión entre dos pelotas
         for(unsigned int j = i + 1; j < balls0.size(); j++) {
             Ball* ball2 = balls0[j];
             if (collisionWithCircle(ball2->x() - ball->x(),
@@ -344,7 +331,7 @@ void Game::handleCollisions() {
                                     }
         }
         
-        //Ball-paddle (and ball-pole) collisions
+        //Colisión entre pelota y paleta o pared
         int paddleIndex;
         float ballPos;
         if (ball->z() < ball->radius()) {
@@ -385,8 +372,7 @@ void Game::handleCollisions() {
 }
 
 namespace {
-    //Returns the position at which the specified paddle will stop if it
-    //immediately starts decelerating
+    //Regresa la posición donde debe frenar una paleta
     float stopPos(Paddle* paddle) {
         float d = paddle->speed() * paddle->speed() / paddle->acceleration();
         if (paddle->speed() > 0) {
@@ -398,7 +384,7 @@ namespace {
     }
 }
 
-/*
+
 void Game::doAI() {
     for(int i = 1; i < 4; i++) {
         Paddle* paddle = paddles0[i];
@@ -406,8 +392,7 @@ void Game::doAI() {
             continue;
         }
         
-        //Find the position of the ball that is nearest the paddle's side, and
-        //store the result in targetPos
+        //Encuentra la posición de la pelota más cercana
         float closestBallDist = 100;
         float targetPos = 0.5f;
         for(unsigned int j = 0; j < balls0.size(); j++) {
@@ -436,8 +421,7 @@ void Game::doAI() {
             }
         }
         
-        //Move toward targetPos.  Stop so that the ball is in the middle 70% of
-        //the paddle.
+        //Mover hacia la posición más cercana
         if (abs(stopPos(paddle) - targetPos) < 0.7f * (PADDLE_LENGTH / 2)) {
             paddle->setDir(0);
         }
@@ -448,10 +432,10 @@ void Game::doAI() {
             paddle->setDir(1);
         }
     }
-}*/
+}
 
 void Game::step() {
-    //Advance the paddles
+    //Mueve las paleta
     for(int i = 0; i < 4; i++) {
         Paddle* paddle = paddles0[i];
         if (paddle != NULL) {
@@ -459,15 +443,15 @@ void Game::step() {
         }
     }
     
-    //Advance the balls
+    //Mueve las pelotas
     for(unsigned int i = 0; i < balls0.size(); i++) {
         balls0[i]->advance(GAME_STEP_TIME);
     }
     
-    //Handle collisions
+    //Maneja Colisiones
     handleCollisions();
     
-    //Check for balls that have scored on a player
+    //Checa si hubo anotación
     vector<Ball*> newBalls;
     for(unsigned int i = 0; i < balls0.size(); i++) {
         Ball* ball = balls0[i];
@@ -478,16 +462,8 @@ void Game::step() {
             if (ball->z() < ball->radius() && (ball->angle() > PI)) {
                 scoredOn = 0;
             }
-            else if (ball->x() < ball->radius() &&
-                     (ball->angle() > PI / 2 && ball->angle() < 3 * PI / 2)) {
-                scoredOn = 1;
-            }
             else if (ball->z() > 1 - ball->radius() && (ball->angle() < PI)) {
                 scoredOn = 2;
-            }
-            else if (ball->x() > 1 - ball->radius() &&
-                     (ball->angle() < PI / 2 || ball->angle() > 3 * PI / 2)) {
-                scoredOn = 3;
             }
             else {
                 scoredOn = -1;
@@ -512,7 +488,7 @@ void Game::step() {
     }
     balls0 = newBalls;
     
-    //Check whether the game is over
+    //Checa si ya se terminó el juego
     bool isGameOver;
     if (paddles0[0] != NULL) {
         isGameOver = true;
@@ -527,9 +503,9 @@ void Game::step() {
     }
     
     if (!isGameOver) {
-        //Try to get to NUM_BALLS balls
+        //Obtener el número de pelotas
         while (balls0.size() < (unsigned int)NUM_BALLS) {
-            //Try to place a ball at the center of the board
+            //Poner una en el centro
             bool ballFits = true;
             for(unsigned int i = 0; i < balls0.size(); i++) {
                 Ball* ball = balls0[i];
@@ -556,8 +532,8 @@ void Game::step() {
         }
     }
     
-    //Run the AI for the computer-controlled paddles
-    //doAI();
+    //Ejecutar control de paleta independiente
+    doAI();
 }
 
 void Game::setPlayerPaddleDir(int dir) {

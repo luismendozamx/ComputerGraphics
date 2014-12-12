@@ -14,7 +14,6 @@
 		1ECADA131A3B52A900493395 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECADA111A3B52A900493395 /* game.cpp */; };
 		1ECADA161A3B52E700493395 /* gamedrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECADA141A3B52E700493395 /* gamedrawer.cpp */; };
 		1ECADA191A3B530D00493395 /* imageloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECADA171A3B530D00493395 /* imageloader.cpp */; };
-		1ECADA1C1A3B536100493395 /* md2model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECADA1A1A3B536100493395 /* md2model.cpp */; };
 		1ECADA221A3B53A500493395 /* vec3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ECADA201A3B53A500493395 /* vec3f.cpp */; };
 /* End PBXBuildFile section */
 
@@ -42,8 +41,6 @@
 		1ECADA151A3B52E700493395 /* gamedrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gamedrawer.h; sourceTree = "<group>"; };
 		1ECADA171A3B530D00493395 /* imageloader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imageloader.cpp; sourceTree = "<group>"; };
 		1ECADA181A3B530D00493395 /* imageloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageloader.h; sourceTree = "<group>"; };
-		1ECADA1A1A3B536100493395 /* md2model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md2model.cpp; sourceTree = "<group>"; };
-		1ECADA1B1A3B536100493395 /* md2model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md2model.h; sourceTree = "<group>"; };
 		1ECADA201A3B53A500493395 /* vec3f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vec3f.cpp; sourceTree = "<group>"; };
 		1ECADA211A3B53A500493395 /* vec3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec3f.h; sourceTree = "<group>"; };
 		1ECADA2C1A3B566E00493395 /* charset */ = {isa = PBXFileReference; lastKnownFileType = file; path = charset; sourceTree = "<group>"; };
@@ -93,8 +90,6 @@
 				1ECADA151A3B52E700493395 /* gamedrawer.h */,
 				1ECADA171A3B530D00493395 /* imageloader.cpp */,
 				1ECADA181A3B530D00493395 /* imageloader.h */,
-				1ECADA1A1A3B536100493395 /* md2model.cpp */,
-				1ECADA1B1A3B536100493395 /* md2model.h */,
 				1ECADA201A3B53A500493395 /* vec3f.cpp */,
 				1ECADA211A3B53A500493395 /* vec3f.h */,
 			);
@@ -160,7 +155,6 @@
 				1ECADA221A3B53A500493395 /* vec3f.cpp in Sources */,
 				1ECADA051A3B521500493395 /* main.cpp in Sources */,
 				1ECADA131A3B52A900493395 /* game.cpp in Sources */,
-				1ECADA1C1A3B536100493395 /* md2model.cpp in Sources */,
 				1ECADA191A3B530D00493395 /* imageloader.cpp in Sources */,
 				1ECADA161A3B52E700493395 /* gamedrawer.cpp in Sources */,
 			);

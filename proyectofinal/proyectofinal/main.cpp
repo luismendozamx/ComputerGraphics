@@ -1,23 +1,4 @@
-/* Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above notice and this permission notice shall be included in all copies
- * or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-/* File for "A Sample Game: Paddle Pong" lesson of the OpenGL tutorial on
- * www.videotutorialsrock.com
+/*
  */
 
 
@@ -41,16 +22,13 @@ using namespace std;
 
 const float PI = 3.1415926535f;
 
-//The number of milliseconds between calls to update
+//Tiempo en milisegundos para actualizar
 const int TIMER_MS = 25;
 
 GameDrawer* gameDrawer;
-//Whether the left key is currently depressed
 bool isLeftKeyPressed = false;
-//Whether the right key is currently depressed
 bool isRightKeyPressed = false;
-//Starts at 0, then increases until it reaches 2 * PI, then jumps back to 0 and
-//repeats.  Used to have the camera angle slowly change.
+
 float rotationVar = 0;
 
 void cleanup() {
@@ -60,12 +38,12 @@ void cleanup() {
 
 void handleKeypress(unsigned char key, int x, int y) {
     switch (key) {
-        case '\r': //Enter key
+        case '\r': //Enter
             if (gameDrawer->isGameOver()) {
-                gameDrawer->startNewGame(2.2f, 20);
+                gameDrawer->startNewGame(2.2f, 10);
             }
             break;
-        case 27: //Escape key
+        case 27: //Escape
             cleanup();
             exit(0);
     }
@@ -144,11 +122,6 @@ void drawScene() {
     glRotatef(50, 1, 0, 0);
     glRotatef(180, 0, 1, 0);
     
-    //This makes the camera rotate slowly over time
-    glTranslatef(0.5f, 0, 0.5f);
-    glRotatef(3 * sin(rotationVar), 0, 1, 0);
-    glTranslatef(-0.5f, 0, -0.5f);
-    
     gameDrawer->draw();
     
     glutSwapBuffers();
@@ -167,13 +140,13 @@ void update(int value) {
 }
 
 int main(int argc, char** argv) {
-    srand((unsigned int)time(0)); //Seed the random number generator
+    srand((unsigned int)time(0)); //Semilla del generador aleatorio
     
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(600, 600);
     
-    glutCreateWindow("A Sample Game: Paddle Pong - videotutorialsrock.com");
+    glutCreateWindow("Proyecto Final - Space Pong");
     initRendering();
     
     gameDrawer = new GameDrawer();

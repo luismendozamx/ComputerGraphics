@@ -25,7 +25,7 @@ private:
     float pos0; //Distancia del centro de la paleta a la esquina a su derecha.
     int dir0;//-1 acelera a la derecha, 1 a la izquierda, 0 está frenando
     float speed0; //Velocidad
-    float timeUntilNextStep; //The amount of game time until the next call to step()
+    float timeUntilNextStep; //Tiempo hasta el siguiente movimiento
     void step();//Cambia el estado de la paleta durante un periodo corto
     
 public:
@@ -45,9 +45,6 @@ private:
     float r;//Radio de la pelota
     float x0;//Coordenada x
     float z0;//Coordenada Z
-    //The angle at which the ball is traveling.  An angle of 0 indicates the
-    //positive x direction, while an angle of PI / 2 indicates the positive
-    //z direction.  The angle is always between 0 and 2 * PI.
     float angle0;//Ángulo al que viaja la pelota.
     float fadeAmount0;//Valor de 0 a 1 para su opacidad al aparecer. =! 1 cuando está apareciendo o desapareciendo.
     bool isFadingOut0;
@@ -70,7 +67,7 @@ public:
 //Clase que controla el estado del juego.
 class Game {
 private:
-    Paddle* paddles0[4];//Arreglo que contiene las paletas. En este caso solo usamos una, pero podrían ser una en cada lado.
+    Paddle* paddles0[4];//Arreglo que contiene las paletas. En este caso solo usamos dos, pero podrían ser una en cada lado.
     std::vector<Ball*> balls0;//Un vector de todas las pelotas que están en el cuadrado.
     int scores[4];//Puntaje de los jugadores, otra vez, podría haber más de uno.
     float timeUntilNextStep;//Tiempo hasta el siguiente step.
