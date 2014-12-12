@@ -47,14 +47,6 @@
 		1ECADA201A3B53A500493395 /* vec3f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vec3f.cpp; sourceTree = "<group>"; };
 		1ECADA211A3B53A500493395 /* vec3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec3f.h; sourceTree = "<group>"; };
 		1ECADA2C1A3B566E00493395 /* charset */ = {isa = PBXFileReference; lastKnownFileType = file; path = charset; sourceTree = "<group>"; };
-		1ECADA2D1A3B566E00493395 /* crab.md2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = crab.md2; sourceTree = "<group>"; };
-		1ECADA2E1A3B566E00493395 /* crab1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = crab1.bmp; sourceTree = "<group>"; };
-		1ECADA2F1A3B566E00493395 /* crab2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = crab2.bmp; sourceTree = "<group>"; };
-		1ECADA301A3B566E00493395 /* crab3.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = crab3.bmp; sourceTree = "<group>"; };
-		1ECADA311A3B566E00493395 /* crab4.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = crab4.bmp; sourceTree = "<group>"; };
-		1ECADA321A3B566E00493395 /* sand.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = sand.bmp; sourceTree = "<group>"; };
-		1ECADA331A3B566E00493395 /* vtr.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = vtr.bmp; sourceTree = "<group>"; };
-		1ECADA341A3B566E00493395 /* water.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = water.bmp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,14 +86,6 @@
 			isa = PBXGroup;
 			children = (
 				1ECADA2C1A3B566E00493395 /* charset */,
-				1ECADA2D1A3B566E00493395 /* crab.md2 */,
-				1ECADA2E1A3B566E00493395 /* crab1.bmp */,
-				1ECADA2F1A3B566E00493395 /* crab2.bmp */,
-				1ECADA301A3B566E00493395 /* crab3.bmp */,
-				1ECADA311A3B566E00493395 /* crab4.bmp */,
-				1ECADA321A3B566E00493395 /* sand.bmp */,
-				1ECADA331A3B566E00493395 /* vtr.bmp */,
-				1ECADA341A3B566E00493395 /* water.bmp */,
 				1ECADA041A3B521500493395 /* main.cpp */,
 				1ECADA111A3B52A900493395 /* game.cpp */,
 				1ECADA121A3B52A900493395 /* game.h */,
@@ -292,6 +276,7 @@
 				1ECADA0A1A3B521500493395 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

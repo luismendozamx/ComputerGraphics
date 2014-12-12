@@ -16,7 +16,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/* File for "A Sample Game: Crab Pong" lesson of the OpenGL tutorial on
+/* File for "A Sample Game: Paddle Pong" lesson of the OpenGL tutorial on
  * www.videotutorialsrock.com
  */
 

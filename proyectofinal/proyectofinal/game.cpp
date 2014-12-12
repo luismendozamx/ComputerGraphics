@@ -16,7 +16,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/* File for "A Sample Game: Crab Pong" lesson of the OpenGL tutorial on
+/* File for "A Sample Game: Paddle Pong" lesson of the OpenGL tutorial on
  * www.videotutorialsrock.com
  */
 
@@ -34,16 +34,16 @@ using namespace std;
 namespace {
     const float PI = 3.1415926535f;
     
-    //The amount of time by which the state of the crab is advanced in each call
-    //to a crab's step() method
-    const float CRAB_STEP_TIME = 0.01f;
-    //The amount of time it takes for a crab to accelerate from no speed to its
+    //The amount of time by which the state of the paddle is advanced in each call
+    //to a paddle's step() method
+    const float PADDLE_STEP_TIME = 0.01f;
+    //The amount of time it takes for a paddle to accelerate from no speed to its
     //maximum speed
     const float TIME_TO_MAXIMUM_SPEED = 0.18f;
     //The maximum angle formed by the direction at which a ball is hit off of a
-    //crab and the normal direction for the crab
-    const float MAX_CRAB_BOUNCE_ANGLE_OFFSET = 0.85f * PI / 2;
-    //The maximum speed of the human-controlled crab
+    //paddle and the normal direction for the paddle
+    const float MAX_PADDLE_BOUNCE_ANGLE_OFFSET = 0.85f * PI / 2;
+    //The maximum speed of the human-controlled paddle
     const float PLAYER_MAXIMUM_SPEED = 2.2f;
     //The amount of time it takes for a ball to fade into play
     const float BALL_FADE_IN_TIME = 0.5f;
@@ -65,7 +65,7 @@ namespace {
     }
 }
 
-Crab::Crab(float maximumSpeed1) {
+Paddle::Paddle(float maximumSpeed1) {
     maximumSpeed = maximumSpeed1;
     pos0 = 0.5f;
     dir0 = 0;
@@ -73,9 +73,9 @@ Crab::Crab(float maximumSpeed1) {
     timeUntilNextStep = 0;
 }
 
-void Crab::step() {
-    //Accelerate the crab
-    float ds = CRAB_STEP_TIME * acceleration();
+void Paddle::step() {
+    //Accelerate the paddle
+    float ds = PADDLE_STEP_TIME * acceleration();
     if (dir0 != 0) {
         speed0 += dir0 * ds;
         if (speed0 > maximumSpeed) {
@@ -99,35 +99,35 @@ void Crab::step() {
         }
     }
     
-    //Move the crab
-    pos0 += CRAB_STEP_TIME * speed0;
-    if (pos0 < BARRIER_SIZE + CRAB_LENGTH / 2) {
-        pos0 = BARRIER_SIZE + CRAB_LENGTH / 2;
+    //Move the paddle
+    pos0 += PADDLE_STEP_TIME * speed0;
+    if (pos0 < BARRIER_SIZE + PADDLE_LENGTH / 2) {
+        pos0 = BARRIER_SIZE + PADDLE_LENGTH / 2;
         speed0 = 0;
     }
-    else if (pos0 > 1 - BARRIER_SIZE - CRAB_LENGTH / 2) {
-        pos0 = 1 - BARRIER_SIZE - CRAB_LENGTH / 2;
+    else if (pos0 > 1 - BARRIER_SIZE - PADDLE_LENGTH / 2) {
+        pos0 = 1 - BARRIER_SIZE - PADDLE_LENGTH / 2;
         speed0 = 0;
     }
 }
 
-float Crab::pos() {
+float Paddle::pos() {
     return pos0;
 }
 
-int Crab::dir() {
+int Paddle::dir() {
     return dir0;
 }
 
-float Crab::speed() {
+float Paddle::speed() {
     return speed0;
 }
 
-float Crab::acceleration() {
+float Paddle::acceleration() {
     return maximumSpeed / TIME_TO_MAXIMUM_SPEED;
 }
 
-void Crab::setDir(int dir1) {
+void Paddle::setDir(int dir1) {
     if (dir1 < 0) {
         dir0 = -1;
     }
@@ -139,12 +139,12 @@ void Crab::setDir(int dir1) {
     }
 }
 
-void Crab::advance(float dt) {
+void Paddle::advance(float dt) {
     while (dt > 0) {
         if (timeUntilNextStep < dt) {
             dt -= timeUntilNextStep;
             step();
-            timeUntilNextStep = CRAB_STEP_TIME;
+            timeUntilNextStep = PADDLE_STEP_TIME;
         }
         else {
             timeUntilNextStep -= dt;
@@ -233,14 +233,14 @@ void Ball::advance(float dt) {
 
 Game::Game(float maximumSpeedForOpponents, int startingScore) {
     if (startingScore > 0) {
-        crabs0[0] = new Crab(PLAYER_MAXIMUM_SPEED);
+        paddles0[0] = new Paddle(PLAYER_MAXIMUM_SPEED);
         for(int i = 1; i < 4; i++) {
-            crabs0[i] = new Crab(maximumSpeedForOpponents);
+            paddles0[i] = new Paddle(maximumSpeedForOpponents);
         }
     }
     else {
         for(int i = 0; i < 4; i++) {
-            crabs0[i] = NULL;
+            paddles0[i] = NULL;
         }
     }
     
@@ -252,8 +252,8 @@ Game::Game(float maximumSpeedForOpponents, int startingScore) {
 
 Game::~Game() {
     for(int i = 0; i < 4; i++) {
-        if (crabs0[i] != NULL) {
-            delete crabs0[i];
+        if (paddles0[i] != NULL) {
+            delete paddles0[i];
         }
     }
     for(unsigned int i = 0; i < balls0.size(); i++) {
@@ -309,24 +309,24 @@ namespace {
         ball->setAngle(newBallAngle);
     }
     
-    //Returns whether a crab at the indicated position has intercepted a ball at
+    //Returns whether a paddle at the indicated position has intercepted a ball at
     //the indicated position, where the positions are measured parallel to the
-    //direction in which the crab moves
-    bool collisionWithCrab(float crabPos, float ballPos) {
-        return abs(crabPos - ballPos) < CRAB_LENGTH / 2;
+    //direction in which the paddle moves
+    bool collisionWithPaddle(float paddlePos, float ballPos) {
+        return abs(paddlePos - ballPos) < PADDLE_LENGTH / 2;
     }
     
-    //Adjusts the ball's angle in response to a collision with a crab.  The
-    //positions are measured parallel to the direction in which the crab moves,
-    //and the crab's position is its distance from its center to the corner to
+    //Adjusts the ball's angle in response to a collision with a paddle.  The
+    //positions are measured parallel to the direction in which the paddle moves,
+    //and the paddle's position is its distance from its center to the corner to
     //its right.
-    void collideWithCrab(Ball* ball,
-                         int crabIndex,
-                         float crabPos,
+    void collideWithPaddle(Ball* ball,
+                         int paddleIndex,
+                         float paddlePos,
                          float ballPos) {
-        float angle = (1 - crabIndex) * PI / 2 +
-        MAX_CRAB_BOUNCE_ANGLE_OFFSET *
-        (crabPos - ballPos) / (CRAB_LENGTH / 2);
+        float angle = (1 - paddleIndex) * PI / 2 +
+        MAX_PADDLE_BOUNCE_ANGLE_OFFSET *
+        (paddlePos - ballPos) / (PADDLE_LENGTH / 2);
         while (angle < 0) {
             angle += 2 * PI;
         }
@@ -372,39 +372,39 @@ void Game::handleCollisions() {
                                     }
         }
         
-        //Ball-crab (and ball-pole) collisions
-        int crabIndex;
+        //Ball-paddle (and ball-pole) collisions
+        int paddleIndex;
         float ballPos;
         if (ball->z() < ball->radius()) {
-            crabIndex = 0;
+            paddleIndex = 0;
             ballPos = ball->x();
         }
         else if (ball->x() < ball->radius()) {
-            crabIndex = 1;
+            paddleIndex = 1;
             ballPos = 1 - ball->z();
         }
         else if (ball->z() > 1 - ball->radius()) {
-            crabIndex = 2;
+            paddleIndex = 2;
             ballPos = 1 - ball->x();
         }
         else if (ball->x() > 1 - ball->radius()) {
-            crabIndex = 3;
+            paddleIndex = 3;
             ballPos = ball->z();
         }
         else {
-            crabIndex = -1;
+            paddleIndex = -1;
             ballPos = 0;
         }
         
-        if (crabIndex >= 0) {
-            if (crabs0[crabIndex] != NULL) {
-                float crabPos = crabs0[crabIndex]->pos();
-                if (collisionWithCrab(crabPos, ballPos)) {
-                    collideWithCrab(ball, crabIndex, crabPos, ballPos);
+        if (paddleIndex >= 0) {
+            if (paddles0[paddleIndex] != NULL) {
+                float paddlePos = paddles0[paddleIndex]->pos();
+                if (collisionWithPaddle(paddlePos, ballPos)) {
+                    collideWithPaddle(ball, paddleIndex, paddlePos, ballPos);
                 }
             }
             else {
-                float normal = (1 - crabIndex) * PI / 2;
+                float normal = (1 - paddleIndex) * PI / 2;
                 float newAngle = reflect(ball->angle(), normal);
                 ball->setAngle(newAngle);
             }
@@ -413,27 +413,28 @@ void Game::handleCollisions() {
 }
 
 namespace {
-    //Returns the position at which the specified crab will stop if it
+    //Returns the position at which the specified paddle will stop if it
     //immediately starts decelerating
-    float stopPos(Crab* crab) {
-        float d = crab->speed() * crab->speed() / crab->acceleration();
-        if (crab->speed() > 0) {
-            return crab->pos() + d;
+    float stopPos(Paddle* paddle) {
+        float d = paddle->speed() * paddle->speed() / paddle->acceleration();
+        if (paddle->speed() > 0) {
+            return paddle->pos() + d;
         }
         else {
-            return crab->pos() - d;
+            return paddle->pos() - d;
         }
     }
 }
 
+/*
 void Game::doAI() {
     for(int i = 1; i < 4; i++) {
-        Crab* crab = crabs0[i];
-        if (crab == NULL) {
+        Paddle* paddle = paddles0[i];
+        if (paddle == NULL) {
             continue;
         }
         
-        //Find the position of the ball that is nearest the crab's side, and
+        //Find the position of the ball that is nearest the paddle's side, and
         //store the result in targetPos
         float closestBallDist = 100;
         float targetPos = 0.5f;
@@ -464,25 +465,25 @@ void Game::doAI() {
         }
         
         //Move toward targetPos.  Stop so that the ball is in the middle 70% of
-        //the crab.
-        if (abs(stopPos(crab) - targetPos) < 0.7f * (CRAB_LENGTH / 2)) {
-            crab->setDir(0);
+        //the paddle.
+        if (abs(stopPos(paddle) - targetPos) < 0.7f * (PADDLE_LENGTH / 2)) {
+            paddle->setDir(0);
         }
-        else if (targetPos < crab->pos()) {
-            crab->setDir(-1);
+        else if (targetPos < paddle->pos()) {
+            paddle->setDir(-1);
         }
         else {
-            crab->setDir(1);
+            paddle->setDir(1);
         }
     }
-}
+}*/
 
 void Game::step() {
-    //Advance the crabs
+    //Advance the paddles
     for(int i = 0; i < 4; i++) {
-        Crab* crab = crabs0[i];
-        if (crab != NULL) {
-            crab->advance(GAME_STEP_TIME);
+        Paddle* paddle = paddles0[i];
+        if (paddle != NULL) {
+            paddle->advance(GAME_STEP_TIME);
         }
     }
     
@@ -520,11 +521,11 @@ void Game::step() {
                 scoredOn = -1;
             }
             
-            if (scoredOn >= 0 && crabs0[scoredOn] != NULL) {
+            if (scoredOn >= 0 && paddles0[scoredOn] != NULL) {
                 scores[scoredOn]--;
                 if (scores[scoredOn] == 0) {
-                    delete crabs0[scoredOn];
-                    crabs0[scoredOn] = NULL;
+                    delete paddles0[scoredOn];
+                    paddles0[scoredOn] = NULL;
                 }
                 
                 ball->fadeOut();
@@ -541,10 +542,10 @@ void Game::step() {
     
     //Check whether the game is over
     bool isGameOver;
-    if (crabs0[0] != NULL) {
+    if (paddles0[0] != NULL) {
         isGameOver = true;
         for(int i = 1; i < 4; i++) {
-            if (crabs0[i] != NULL) {
+            if (paddles0[i] != NULL) {
                 isGameOver = false;
             }
         }
@@ -583,18 +584,18 @@ void Game::step() {
         }
     }
     
-    //Run the AI for the computer-controlled crabs
-    doAI();
+    //Run the AI for the computer-controlled paddles
+    //doAI();
 }
 
-void Game::setPlayerCrabDir(int dir) {
-    if (crabs0[0] != NULL) {
-        crabs0[0]->setDir(dir);
+void Game::setPlayerPaddleDir(int dir) {
+    if (paddles0[0] != NULL) {
+        paddles0[0]->setDir(dir);
     }
 }
 
-int Game::score(int crabNum) {
-    return scores[crabNum];
+int Game::score(int paddleNum) {
+    return scores[paddleNum];
 }
 
 void Game::advance(float dt) {
@@ -602,7 +603,7 @@ void Game::advance(float dt) {
         if (timeUntilNextStep < dt) {
             dt -= timeUntilNextStep;
             step();
-            timeUntilNextStep = CRAB_STEP_TIME;
+            timeUntilNextStep = PADDLE_STEP_TIME;
         }
         else {
             timeUntilNextStep -= dt;
@@ -611,8 +612,8 @@ void Game::advance(float dt) {
     }
 }
 
-Crab** Game::crabs() {
-    return crabs0;
+Paddle** Game::paddles() {
+    return paddles0;
 }
 
 vector<Ball*> Game::balls() {

@@ -16,7 +16,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/* File for "A Sample Game: Crab Pong" lesson of the OpenGL tutorial on
+/* File for "A Sample Game: Paddle Pong" lesson of the OpenGL tutorial on
  * www.videotutorialsrock.com
  */
 
@@ -50,9 +50,9 @@ namespace {
     const float WALK_ANIM_TIME = 0.4f;
     //The duration of a single loop of the standing animation
     const float STAND_ANIM_TIME = 2.0f;
-    //The amount of time it takes for a crab that has just been eliminated to
+    //The amount of time it takes for a paddle that has just been eliminated to
     //shrink and disappear
-    const float CRAB_FADE_OUT_TIME = 1.5f;
+    const float PADDLE_FADE_OUT_TIME = 1.5f;
     //The number of points used to approximate a circle in the barrier model
     const int NUM_BARRIER_POINTS = 30;
     //The number of points used to approximate a circle in the pole model
@@ -63,9 +63,9 @@ namespace {
     const float POLE_RADIUS = 0.02f;
     //The height of the center of a pole above the ground
     const float POLE_HEIGHT = 0.07f;
-    //The number of units the human player's crab model should be translated in
-    //the z direction, and that other crabs should similarly be translated
-    const float CRAB_OFFSET = -0.032f;
+    //The number of units the human player's paddle model should be translated in
+    //the z direction, and that other paddles should similarly be translated
+    const float PADDLE_OFFSET = -0.032f;
     //The amount of time until the water travels WATER_TEXTURE_SIZE units
     const float WATER_TEXTURE_TIME = 8.0f;
     //The length of a single repetition of the water texture image
@@ -92,7 +92,7 @@ namespace {
 
 GameDrawer::GameDrawer() {
     game = NULL;
-    playerCrabDir = 0;
+    playerPaddleDir = 0;
     
     //Start a new placeholder game with a maximum score of 0
     startNewGame(0, 0);
@@ -100,11 +100,11 @@ GameDrawer::GameDrawer() {
     waterTextureOffset = 0;
     
     vector<const char*> textureFilenames;
-    textureFilenames.push_back("/Users/luismendoza/Sandbox/ComputerGraphics/proyectofinal/proyectofinal/crab1.bmp");
-    textureFilenames.push_back("/Users/luismendoza/Sandbox/ComputerGraphics/proyectofinal/proyectofinal/crab2.bmp");
-    textureFilenames.push_back("/Users/luismendoza/Sandbox/ComputerGraphics/proyectofinal/proyectofinal/crab3.bmp");
-    textureFilenames.push_back("/Users/luismendoza/Sandbox/ComputerGraphics/proyectofinal/proyectofinal/crab4.bmp");
-    crabModel = MD2Model::load("/Users/luismendoza/Sandbox/ComputerGraphics/proyectofinal/proyectofinal/crab.md2", textureFilenames);
+    textureFilenames.push_back("/Users/luismendoza/Sandbox/ComputerGraphics/proyectofinal/proyectofinal/paddle1.bmp");
+    textureFilenames.push_back("/Users/luismendoza/Sandbox/ComputerGraphics/proyectofinal/proyectofinal/paddle2.bmp");
+    textureFilenames.push_back("/Users/luismendoza/Sandbox/ComputerGraphics/proyectofinal/proyectofinal/paddle3.bmp");
+    textureFilenames.push_back("/Users/luismendoza/Sandbox/ComputerGraphics/proyectofinal/proyectofinal/paddle4.bmp");
+    paddleModel = MD2Model::load("/Users/luismendoza/Sandbox/ComputerGraphics/proyectofinal/proyectofinal/paddle.md2", textureFilenames);
     
     setupBarriers();
     setupPole();
@@ -128,7 +128,7 @@ void GameDrawer::setGame(Game* game1) {
     }
     
     game = game1;
-    game->setPlayerCrabDir(playerCrabDir);
+    game->setPlayerPaddleDir(playerPaddleDir);
     timeUntilNextStep = 0;
     
     isGameOver0 = (game->score(0) == 0);
@@ -138,18 +138,18 @@ void GameDrawer::setGame(Game* game1) {
         animTimes[i] = 0;
         
         if (!isGameOver0) {
-            crabFadeAmounts[i] = 1;
+            paddleFadeAmounts[i] = 1;
         }
         else {
-            crabFadeAmounts[i] = 0;
+            paddleFadeAmounts[i] = 0;
         }
         
-        Crab* crab = game->crabs()[i];
-        if (crab != NULL) {
-            oldCrabPos[i] = game->crabs()[i]->pos();
+        Paddle* paddle = game->paddles()[i];
+        if (paddle != NULL) {
+            oldPaddlePos[i] = game->paddles()[i]->pos();
         }
         else {
-            oldCrabPos[i] = 0.5f;
+            oldPaddlePos[i] = 0.5f;
         }
     }
 }
@@ -302,19 +302,19 @@ void GameDrawer::step() {
         waterTextureOffset -= WATER_TEXTURE_SIZE;
     }
     
-    //Update animTimes, crabFadeAmounts, and isGameOver0
+    //Update animTimes, paddleFadeAmounts, and isGameOver0
     bool opponentAlive = false;
     for(int i = 0; i < 4; i++) {
-        Crab* crab = game->crabs()[i];
+        Paddle* paddle = game->paddles()[i];
         
-        if (crab != NULL) {
-            oldCrabPos[i] = crab->pos();
+        if (paddle != NULL) {
+            oldPaddlePos[i] = paddle->pos();
         }
         
         //Update animation time
-        if (crab != NULL || crabFadeAmounts[i] > 0) {
-            if (crab != NULL && crab->dir() != 0) {
-                if (crab->dir() > 0) {
+        if (paddle != NULL || paddleFadeAmounts[i] > 0) {
+            if (paddle != NULL && paddle->dir() != 0) {
+                if (paddle->dir() > 0) {
                     animTimes[i] += STEP_TIME / WALK_ANIM_TIME;
                 }
                 else {
@@ -334,13 +334,13 @@ void GameDrawer::step() {
         }
         
         //Update fade amount
-        if (crab == NULL) {
-            crabFadeAmounts[i] -= STEP_TIME / CRAB_FADE_OUT_TIME;
-            if (crabFadeAmounts[i] < 0) {
+        if (paddle == NULL) {
+            paddleFadeAmounts[i] -= STEP_TIME / PADDLE_FADE_OUT_TIME;
+            if (paddleFadeAmounts[i] < 0) {
                 if (i == 0) {
                     isGameOver0 = true;
                 }
-                crabFadeAmounts[i] = 0;
+                paddleFadeAmounts[i] = 0;
             }
             else if (i != 0) {
                 opponentAlive = true;
@@ -375,11 +375,11 @@ void GameDrawer::setupLighting() {
     }
 }
 
-void GameDrawer::drawCrabsAndPoles(bool isReflected) {
-    if (crabModel != NULL) {
+void GameDrawer::drawPaddlesAndPoles(bool isReflected) {
+    if (paddleModel != NULL) {
         glEnable(GL_NORMALIZE);
         for(int i = 0; i < 4; i++) {
-            Crab* crab = game->crabs()[i];
+            Paddle* paddle = game->paddles()[i];
             
             //Translate and rotate to the appropriate side of the board
             glPushMatrix();
@@ -398,44 +398,44 @@ void GameDrawer::drawCrabsAndPoles(bool isReflected) {
                     break;
             }
             
-            if (crab != NULL || crabFadeAmounts[i] > 0) {
-                //Draw the crab
+            if (paddle != NULL || paddleFadeAmounts[i] > 0) {
+                //Draw the paddle
                 glPushMatrix();
                 
-                float crabPos;
-                if (crab != NULL) {
-                    crabPos = crab->pos();
+                float paddlePos;
+                if (paddle != NULL) {
+                    paddlePos = paddle->pos();
                 }
                 else {
-                    crabPos = oldCrabPos[i];
+                    paddlePos = oldPaddlePos[i];
                 }
-                glTranslatef(crabPos, 0.055f, CRAB_OFFSET);
-                if (crab == NULL) {
-                    //Used for the shrinking effect, whereby crabs shrink
+                glTranslatef(paddlePos, 0.055f, PADDLE_OFFSET);
+                if (paddle == NULL) {
+                    //Used for the shrinking effect, whereby paddles shrink
                     //until they disappear when they are eliminated from play
-                    glTranslatef(0, -0.055f * (1 - crabFadeAmounts[i]), 0);
-                    glScalef(crabFadeAmounts[i],
-                             crabFadeAmounts[i],
-                             crabFadeAmounts[i]);
+                    glTranslatef(0, -0.055f * (1 - paddleFadeAmounts[i]), 0);
+                    glScalef(paddleFadeAmounts[i],
+                             paddleFadeAmounts[i],
+                             paddleFadeAmounts[i]);
                 }
                 
                 glRotatef(-90, 0, 1, 0);
                 glRotatef(-90, 1, 0, 0);
                 glScalef(0.05f, 0.05f, 0.05f);
                 
-                if (crab == NULL || crab->dir() == 0) {
-                    crabModel->setAnimation("stand");
+                if (paddle == NULL || paddle->dir() == 0) {
+                    paddleModel->setAnimation("stand");
                 }
                 else {
-                    crabModel->setAnimation("run");
+                    paddleModel->setAnimation("run");
                 }
                 
                 glColor3f(1, 1, 1);
-                crabModel->draw(i, animTimes[i]);
+                paddleModel->draw(i, animTimes[i]);
                 glPopMatrix();
             }
             
-            if (crab == NULL) {
+            if (paddle == NULL) {
                 //Draw the pole
                 if (isReflected) {
                     glDisable(GL_NORMALIZE);
@@ -538,7 +538,7 @@ void GameDrawer::drawBalls(bool isReflected) {
 }
 
 void GameDrawer::drawReflectableObjects(bool isReflected) {
-    drawCrabsAndPoles(isReflected);
+    drawPaddlesAndPoles(isReflected);
     drawBarriers(isReflected);
     drawScores(isReflected);
     drawBalls(isReflected);
@@ -669,9 +669,9 @@ void GameDrawer::advance(float dt) {
     }
 }
 
-void GameDrawer::setPlayerCrabDir(int dir) {
-    playerCrabDir = dir;
-    game->setPlayerCrabDir(dir);
+void GameDrawer::setPlayerPaddleDir(int dir) {
+    playerPaddleDir = dir;
+    game->setPlayerPaddleDir(dir);
 }
 
 bool GameDrawer::isGameOver() {

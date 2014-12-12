@@ -16,7 +16,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/* File for "A Sample Game: Crab Pong" lesson of the OpenGL tutorial on
+/* File for "A Sample Game: Paddle Pong" lesson of the OpenGL tutorial on
  * www.videotutorialsrock.com
  */
 
@@ -76,19 +76,19 @@ void handleSpecialKeypress(int key, int x, int y) {
         case GLUT_KEY_LEFT:
             isLeftKeyPressed = true;
             if (isRightKeyPressed) {
-                gameDrawer->setPlayerCrabDir(0);
+                gameDrawer->setPlayerPaddleDir(0);
             }
             else {
-                gameDrawer->setPlayerCrabDir(1);
+                gameDrawer->setPlayerPaddleDir(1);
             }
             break;
         case GLUT_KEY_RIGHT:
             isRightKeyPressed = true;
             if (isLeftKeyPressed) {
-                gameDrawer->setPlayerCrabDir(0);
+                gameDrawer->setPlayerPaddleDir(0);
             }
             else {
-                gameDrawer->setPlayerCrabDir(-1);
+                gameDrawer->setPlayerPaddleDir(-1);
             }
             break;
     }
@@ -99,19 +99,19 @@ void handleSpecialKeyReleased(int key, int x, int y) {
         case GLUT_KEY_LEFT:
             isLeftKeyPressed = false;
             if (isRightKeyPressed) {
-                gameDrawer->setPlayerCrabDir(-1);
+                gameDrawer->setPlayerPaddleDir(-1);
             }
             else {
-                gameDrawer->setPlayerCrabDir(0);
+                gameDrawer->setPlayerPaddleDir(0);
             }
             break;
         case GLUT_KEY_RIGHT:
             isRightKeyPressed = false;
             if (isLeftKeyPressed) {
-                gameDrawer->setPlayerCrabDir(1);
+                gameDrawer->setPlayerPaddleDir(1);
             }
             else {
-                gameDrawer->setPlayerCrabDir(0);
+                gameDrawer->setPlayerPaddleDir(0);
             }
             break;
     }
@@ -173,7 +173,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(600, 600);
     
-    glutCreateWindow("A Sample Game: Crab Pong - videotutorialsrock.com");
+    glutCreateWindow("A Sample Game: Paddle Pong - videotutorialsrock.com");
     initRendering();
     
     gameDrawer = new GameDrawer();
