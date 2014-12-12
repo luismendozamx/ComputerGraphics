@@ -205,9 +205,9 @@ void Ball::advance(float dt) {
 Game::Game(float maximumSpeedForOpponents, int startingScore) {
     if (startingScore > 0) {
         paddles0[0] = new Paddle(PLAYER_MAXIMUM_SPEED);
-        for(int i = 1; i < 4; i++) {
-            paddles0[i] = new Paddle(maximumSpeedForOpponents);
-        }
+        paddles0[1] = NULL;
+        paddles0[2] = new Paddle(maximumSpeedForOpponents);
+        paddles0[3] = NULL;
     }
     else {
         for(int i = 0; i < 4; i++) {
@@ -215,9 +215,10 @@ Game::Game(float maximumSpeedForOpponents, int startingScore) {
         }
     }
     
-    for(int i = 0; i < 4; i++) {
-        scores[i] = startingScore;
-    }
+    scores[0] = startingScore;
+    scores[1] = 0;
+    scores[2] = startingScore;
+    scores[3] = 0;
     timeUntilNextStep = 0;
 }
 

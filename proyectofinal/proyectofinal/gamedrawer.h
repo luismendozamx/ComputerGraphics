@@ -52,6 +52,7 @@ private:
     //eliminated.  It is drawn for the side connecting (0, 0, 0) and
     //(1, 0, 0).
     GLuint poleDisplayListId;
+    GLuint paddleDisplayListId;
     //The id of the texture for the sand
     GLuint sandTextureId;
     //The id of the texture for the water
@@ -85,6 +86,7 @@ private:
     void setupBarriers();
     //Sets up the display list for the pole
     void setupPole();
+    void setupPaddle();
     //Advances the state of the game by a short amount of time
     void step();
     

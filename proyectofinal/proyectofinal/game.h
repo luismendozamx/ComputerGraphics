@@ -75,7 +75,7 @@ private:
     int scores[4];//Puntaje de los jugadores, otra vez, podría haber más de uno.
     float timeUntilNextStep;//Tiempo hasta el siguiente step.
     void handleCollisions();//Manejador de colisiones
-    //void doAI();
+    void doAI();
     void step();//Avanza el estado del juego.
 public:
     //Constructor del juego que resive la velocidad máxima y el puntaje inicial

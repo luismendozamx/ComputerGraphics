@@ -108,6 +108,7 @@ GameDrawer::GameDrawer() {
     
     setupBarriers();
     setupPole();
+    setupPaddle();
     
     Image* image = loadBMP("/Users/luismendoza/Sandbox/ComputerGraphics/proyectofinal/proyectofinal/sand.bmp");
     sandTextureId = loadTexture(image);
@@ -292,6 +293,54 @@ void GameDrawer::setupPole() {
     glEndList();
 }
 
+void GameDrawer::setupPaddle() {
+    paddleDisplayListId = glGenLists(1);
+    glNewList(paddleDisplayListId, GL_COMPILE);
+    glDisable(GL_TEXTURE_2D);
+    glColor3f(0.0f, 0.8f, 0.0f);
+    
+    //Draw the left circle
+    glNormal3f(-1, 0, 0);
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex3f(BARRIER_SIZE, POLE_HEIGHT, -POLE_RADIUS);
+    for(int i = NUM_POLE_POINTS; i >= 0; i--) {
+        float angle = 2 * PI * (float)i / (float)NUM_POLE_POINTS;
+        glVertex3f(BARRIER_SIZE,
+                   POLE_HEIGHT + POLE_RADIUS * cos(angle),
+                   POLE_RADIUS * (sin(angle) - 1));
+    }
+    glEnd();
+    
+    //Draw the right circle
+    glNormal3f(1, 0, 0);
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex3f(1 - BARRIER_SIZE, POLE_HEIGHT, -POLE_RADIUS);
+    for(int i = 0; i <= NUM_POLE_POINTS; i++) {
+        float angle = 2 * PI * (float)i / (float)NUM_POLE_POINTS;
+        glVertex3f(1 - BARRIER_SIZE,
+                   POLE_HEIGHT + POLE_RADIUS * cos(angle),
+                   POLE_RADIUS * (sin(angle) - 1));
+    }
+    glEnd();
+    
+    //Draw the cylinder part
+    glBegin(GL_QUAD_STRIP);
+    for(int i = 0; i <= NUM_POLE_POINTS; i++) {
+        float angle = 2 * PI * ((float)i - 0.5f) / (float)NUM_POLE_POINTS;
+        glNormal3f(0, cos(angle), sin(angle));
+        float angle2 = 2 * PI * (float)i / (float)NUM_POLE_POINTS;
+        glVertex3f(1 - BARRIER_SIZE,
+                   POLE_HEIGHT + POLE_RADIUS * cos(angle2),
+                   POLE_RADIUS * (sin(angle2) - 1));
+        glVertex3f(BARRIER_SIZE,
+                   POLE_HEIGHT + POLE_RADIUS * cos(angle2),
+                   POLE_RADIUS * (sin(angle2) - 1));
+    }
+    glEnd();
+    
+    glEndList();
+}
+
 void GameDrawer::step() {
     //Advance the game
     game->advance(STEP_TIME);
@@ -423,15 +472,16 @@ void GameDrawer::drawPaddlesAndPoles(bool isReflected) {
                 glRotatef(-90, 1, 0, 0);
                 glScalef(0.05f, 0.05f, 0.05f);
                 
-                if (paddle == NULL || paddle->dir() == 0) {
+                /*if (paddle == NULL || paddle->dir() == 0) {
                     paddleModel->setAnimation("stand");
                 }
                 else {
                     paddleModel->setAnimation("run");
-                }
+                }*/
                 
                 glColor3f(1, 1, 1);
-                paddleModel->draw(i, animTimes[i]);
+                //paddleModel->draw(i, animTimes[i]);
+                glCallList(poleDisplayListId);
                 glPopMatrix();
             }
             
