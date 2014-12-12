@@ -1,26 +1,9 @@
-/* Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+/*
+ * Implementación de la clase de Juego.
  *
- * The above notice and this permission notice shall be included in all copies
- * or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ *
  */
-/* File for "A Sample Game: Paddle Pong" lesson of the OpenGL tutorial on
- * www.videotutorialsrock.com
- */
-
-
 
 #include <cmath>
 #include <cstdlib>
@@ -34,37 +17,26 @@ using namespace std;
 namespace {
     const float PI = 3.1415926535f;
     
-    //The amount of time by which the state of the paddle is advanced in each call
-    //to a paddle's step() method
-    const float PADDLE_STEP_TIME = 0.01f;
-    //The amount of time it takes for a paddle to accelerate from no speed to its
-    //maximum speed
-    const float TIME_TO_MAXIMUM_SPEED = 0.18f;
+    const float PADDLE_STEP_TIME = 0.01f;//Tiempo que dura el movimiento de la paleta
+    const float TIME_TO_MAXIMUM_SPEED = 0.18f;//Tiempo que toma acelerar la paleta de 0 a su velocidad máxima.
     //The maximum angle formed by the direction at which a ball is hit off of a
     //paddle and the normal direction for the paddle
-    const float MAX_PADDLE_BOUNCE_ANGLE_OFFSET = 0.85f * PI / 2;
-    //The maximum speed of the human-controlled paddle
-    const float PLAYER_MAXIMUM_SPEED = 2.2f;
-    //The amount of time it takes for a ball to fade into play
-    const float BALL_FADE_IN_TIME = 0.5f;
-    //The amount of time it takes for a ball to fade out of play
-    const float BALL_FADE_OUT_TIME = 0.5f;
-    //The radius of the balls
-    const float BALL_RADIUS = 0.04f;
-    //The speed of the balls
-    const float BALL_SPEED = 1.0f;
-    //The ideal number of balls in play
-    const int NUM_BALLS = 2;
-    //The amount of time by which the state of the game is advanced in each call
-    //to the game's step() method
-    const float GAME_STEP_TIME = 0.01f;
+    const float MAX_PADDLE_BOUNCE_ANGLE_OFFSET = 0.85f * PI / 2;//
+    const float PLAYER_MAXIMUM_SPEED = 2.2f;//Velocidad máxima de la paleta
+    const float BALL_FADE_IN_TIME = 0.5f;//Tiempo para aparecer una pelota
+    const float BALL_FADE_OUT_TIME = 0.5f;//Tiempo para desaparecer una pelota
+    const float BALL_RADIUS = 0.04f;//Radio de las pelotas
+    const float BALL_SPEED = 1.0f;//velocidad de las pelotas
+    const int NUM_BALLS = 2;//Numero ideal de pelotas en juego
+    const float GAME_STEP_TIME = 0.01f;//Tiempo en el que se avanza el juego
     
-    //Returns a random float from 0 to < 1
+    //Método que regresa un número aleatorio de 0 a <1
     float randomFloat() {
         return (float)rand() / ((float)RAND_MAX + 1);
     }
 }
 
+//Inicializar paleta
 Paddle::Paddle(float maximumSpeed1) {
     maximumSpeed = maximumSpeed1;
     pos0 = 0.5f;
@@ -73,8 +45,9 @@ Paddle::Paddle(float maximumSpeed1) {
     timeUntilNextStep = 0;
 }
 
+//Método que mueve una paleta
 void Paddle::step() {
-    //Accelerate the paddle
+    //Acelera la paleta
     float ds = PADDLE_STEP_TIME * acceleration();
     if (dir0 != 0) {
         speed0 += dir0 * ds;
@@ -99,7 +72,7 @@ void Paddle::step() {
         }
     }
     
-    //Move the paddle
+    //Mueve la paleta sin salirse de las barreras del cuadrado
     pos0 += PADDLE_STEP_TIME * speed0;
     if (pos0 < BARRIER_SIZE + PADDLE_LENGTH / 2) {
         pos0 = BARRIER_SIZE + PADDLE_LENGTH / 2;
@@ -139,6 +112,7 @@ void Paddle::setDir(int dir1) {
     }
 }
 
+//Llama al método step() para acelerar la paleta un número determinado de tiempo.
 void Paddle::advance(float dt) {
     while (dt > 0) {
         if (timeUntilNextStep < dt) {
@@ -153,10 +127,7 @@ void Paddle::advance(float dt) {
     }
 }
 
-
-
-
-
+//Constructor de las pelotas.
 Ball::Ball(float radius1, float x1, float z1, float angle1) {
     r = radius1;
     x0 = x1;
@@ -222,7 +193,7 @@ void Ball::advance(float dt) {
         return;
     }
     
-    //Advance the position of the ball
+    //Avanza la posición de la pelota
     x0 += dt * cos(angle0) * BALL_SPEED;
     z0 += dt * sin(angle0) * BALL_SPEED;
 }

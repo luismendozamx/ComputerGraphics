@@ -80,7 +80,7 @@ private:
 public:
     //Constructor del juego que resive la velocidad máxima y el puntaje inicial
     Game(float maximumSpeedForOpponents, int startingScore);
-    ~Game();
+    ~Game();//Desctructor de la Clase.
     
     void setPlayerPaddleDir(int dir);//Cambia la dirección el la que se mueve la paleta
     int score(int paddleNum);//Regresa el puntaje
