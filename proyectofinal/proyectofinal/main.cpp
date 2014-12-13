@@ -1,4 +1,10 @@
 /*
+ * Main
+ * La descripción del funcionamiento se encuentra en game.h
+ *
+ * Luis Mendoza
+ * Clase: Gráficas por Computadora
+ * Fecha: 12/12/2014
  */
 
 

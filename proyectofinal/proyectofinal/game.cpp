@@ -1,8 +1,9 @@
 /*
  * Implementación de la clase de Juego.
  *
- *
- *
+ * Luis Mendoza
+ * Clase: Gráficas por Computadora
+ * Fecha: 12/12/2014
  */
 
 #include <cmath>

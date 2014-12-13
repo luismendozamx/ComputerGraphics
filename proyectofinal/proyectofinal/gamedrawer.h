@@ -1,4 +1,9 @@
 /*
+ * Definición de la clase que dibuja el juego. Utiliza la clase Game para mantener la lógica de juego.
+ *
+ * Luis Mendoza
+ * Clase: Gráficas por Computadora
+ * Fecha: 12/12/2014
  */
 
 

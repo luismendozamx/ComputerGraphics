@@ -4,8 +4,10 @@
  * Hay pelotas y una paleta de longitud PADDLE_LENGTH. En 3 de los lados del cuadrado hay paredes,
  * de éstas rebotan las pelotas que aparecen y el jugador debe evitar que salgan del cuadrado.
  * Para moverse utiliza las flechas izquierda y derecha.
- *
- *
+ * 
+ * Luis Mendoza
+ * Clase: Gráficas por Computadora
+ * Fecha: 12/12/2014
  */
 
 #ifndef GAME_H_INCLUDED

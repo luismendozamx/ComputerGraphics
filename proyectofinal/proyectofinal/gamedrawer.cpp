@@ -1,4 +1,9 @@
 /*
+ * Implementación de la clase que dibuja el juego. Utiliza la clase Game para mantener la lógica de juego.
+ *
+ * Luis Mendoza
+ * Clase: Gráficas por Computadora
+ * Fecha: 12/12/2014
  */
 
 
@@ -358,7 +363,7 @@ void GameDrawer::drawPaddlesAndPoles(bool isReflected) {
                 glScalef(0.05f, 0.05f, 0.05f);
                 
                 glColor3f(1, 1, 1);
-                glutSolidSphere(1, 10, 6);
+                glutSolidSphere(1.5, 10, 6);
                 glPopMatrix();
             }
             
